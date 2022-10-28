@@ -1,23 +1,37 @@
-import logo from './logo.svg';
+import React, {useState, useRef} from 'react';
 import './App.css';
 
 function App() {
+  const [details, setDetails] = useState([])
+
+  const nameRef=useRef();
+  const dobRef=useRef();
+  const phoneRef=useRef();
+
+  function handleForm(e){
+    const name= nameRef.current.value;
+    const dob= dobRef.current.value;
+    const phone = phoneRef.current.value;
+    if(name==="" | dob==="" | phone==="" ){
+      return console.log(name);
+    } else{
+      setDetails (prevDetails =>
+        { return [ ...prevDetails, {name:name, dob:dob, phone:phone,}]
+      })
+      console.log(details)
+      nameRef.current.value=null
+    }
+  }
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      Name : 
+      <input type={"text"} ref={nameRef}></input><br/>
+      DOB :
+      <input type={"date"} ref={dobRef}></input><br/>
+      Phone :
+      <input type={'number'} ref={phoneRef}></input><br/>
+      <button type='submit' onClick={handleForm}>Submit</button><br/>
     </div>
   );
 }
