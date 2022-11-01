@@ -1,5 +1,6 @@
 import React, {useState, useRef} from 'react';
 import './App.css';
+import {v4 as uuidv4} from 'uuid';
 
 function App() {
   const [details, setDetails] = useState([])
@@ -16,7 +17,7 @@ function App() {
       return console.log(name);
     } else{
       setDetails (prevDetails =>
-        { return [ ...prevDetails, {name:name, dob:dob, phone:phone,}]
+        { return [ ...prevDetails, {id:uuidv4(), name:name, dob:dob, phone:phone,}]
       })
       console.log(details)
       nameRef.current.value=null
